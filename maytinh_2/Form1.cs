@@ -17,11 +17,6 @@ namespace maytinh_2
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button16_Click(object sender, EventArgs e)
         {
             PTtext.Text += "0";
@@ -74,32 +69,68 @@ namespace maytinh_2
 
         private void button17_Click(object sender, EventArgs e)
         {
-            PTtext.Text += ".";
+            PTtext.Text += "%";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            PTtext.Text += ",/,";
+            PTtext.Text += " / ";
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            PTtext.Text += ",*,";
+            PTtext.Text += " * ";
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            PTtext.Text += ",-,";
+            PTtext.Text += " - ";
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            PTtext.Text += ",+,";
+            if (PTtext.Text.Split(' ').Length >= 3)
+            {
+                Tinh(PTtext.Text.Split(' '));
+                PTtext.Text = KQtext.Text + " + ";
+            }
+            else
+            {
+                PTtext.Text += " + ";
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
+            string[] s = PTtext.Text.Split(' ');
+            if (s.Length <= 1)
+            {
+                return;
+            }
+            Tinh(s);
+        }
 
+        private void Tinh(string[] s)
+        {
+            double num1 = double.Parse(s[0]);
+            double num2 = double.Parse(s[2]);
+            double kq = 0;
+            if (s[1] == "+")
+            {
+                kq = num1 + num2;
+            }
+            else if (s[1] == "-")
+            {
+                kq = num1 - num2;
+            }
+
+            KQtext.Text = kq.ToString();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            PTtext.Text = "";
+            KQtext.Text = "";
         }
     }
 }
